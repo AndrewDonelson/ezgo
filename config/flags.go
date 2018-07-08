@@ -12,8 +12,10 @@ var (
 	errZeroLengthLabelKey = errors.New("zero-length label key")
 )
 
+//URL represents a URI reference
 type URL struct{ url.URL }
 
+//Set sets a url
 func (u *URL) Set(value string) error {
 	parsed, err := url.Parse(value)
 	if err != nil {
@@ -29,8 +31,10 @@ type Label struct {
 	Value *string
 }
 
+//Labels is a list of label
 type Labels []Label
 
+//Set adds a label to the list
 func (labels *Labels) Set(value string) error {
 	set := func(k, v string) {
 		var val *string
