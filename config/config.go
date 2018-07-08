@@ -68,7 +68,7 @@ func LoadConfig(name, path string) (*Config, error) {
 
 	//if no path is given use default current folder (exe)
 	if path == "" {
-		path = "./"
+		path = "/"
 	}
 	_, err := os.Stat(path)
 	if err != nil {
