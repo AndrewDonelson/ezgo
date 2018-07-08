@@ -60,7 +60,16 @@ func DefaultConfig() Config {
 //	* .yml     - is decoded as yaml
 //	* .toml    - is decoded as toml
 //  * .hcl	   - is decoded as hcl
-func LoadConfig(path string) (*Config, error) {
+func LoadConfig(name, path string) (*Config, error) {
+	//If no filename given use default 'config'
+	if name == "" {
+		name = "config"
+	}
+
+	//if no path is given use default current folder (exe)
+	if path == "" {
+		path = "./"
+	}
 	_, err := os.Stat(path)
 	if err != nil {
 		return nil, err
