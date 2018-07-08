@@ -4,8 +4,6 @@ import (
 	"errors"
 	"net/url"
 	"strings"
-	//"github.com/mesos/mesos-go/api/v1/lib/encoding"
-	//"github.com/mesos/mesos-go/api/v1/lib/encoding/codecs"
 )
 
 var (
