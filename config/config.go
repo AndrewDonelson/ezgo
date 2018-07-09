@@ -19,38 +19,39 @@ import (
 
 //Config is the primary configuration structure for your application. Modifiy the properties as you see fit.
 type Config struct {
-	aString  string
-	aInteger int
-	aFloat   float64
-	aBoolean bool
-	aStruct  credentials
+	AString  string `json:"a_string" yaml:"a_string" toml:"a_string" hcl:"a_string"`
+	AInteger int    `json:"a_integer" yaml:"a_integer" toml:"a_integer" hcl:"a_integer"`
+	AFloat   float64
+	ABoolean bool `json:"a_boolean" yaml:"a_boolean" toml:"a_boolean" hcl:"a_boolean"`
+	AStruct  Credentials
 }
 
-type credentials struct {
-	username string
-	password string
+//Credentials is a structure holding a Username an d Password. Used for testing.
+type Credentials struct {
+	Username string
+	Password string
 }
 
 //AddFlags makes each configuration property available on commandline
 func (cfg *Config) AddFlags(fs *flag.FlagSet) {
-	fs.StringVar(&cfg.aString, "string", cfg.aString, "Framework user to register with the Mesos master")
-	fs.IntVar(&cfg.aInteger, "integer", cfg.aInteger, "Framework name to register with the Mesos master")
-	fs.Float64Var(&cfg.aFloat, "float", cfg.aFloat, "Framework role to register with the Mesos master")
-	fs.BoolVar(&cfg.aBoolean, "boolean", cfg.aBoolean, "Codec to encode/decode scheduler API communications [protobuf, json]")
-	fs.StringVar(&cfg.aStruct.username, "aStruct.username", cfg.aStruct.username, "Username for Mesos authentication")
-	fs.StringVar(&cfg.aStruct.password, "aStruct.passwordFile", cfg.aStruct.password, "Path to file that contains the password for Mesos authentication")
+	fs.StringVar(&cfg.AString, "string", cfg.AString, "Framework user to register with the Mesos master")
+	fs.IntVar(&cfg.AInteger, "integer", cfg.AInteger, "Framework name to register with the Mesos master")
+	fs.Float64Var(&cfg.AFloat, "float", cfg.AFloat, "Framework role to register with the Mesos master")
+	fs.BoolVar(&cfg.ABoolean, "boolean", cfg.ABoolean, "Codec to encode/decode scheduler API communications [protobuf, json]")
+	fs.StringVar(&cfg.AStruct.Username, "AStruct.Username", cfg.AStruct.Username, "Username for Mesos authentication")
+	fs.StringVar(&cfg.AStruct.Password, "AStruct.Password", cfg.AStruct.Password, "Path to file that contains the Password for Mesos authentication")
 }
 
 //DefaultConfig crates adn returns a new configuration object
 func DefaultConfig() Config {
 	return Config{
-		aString:  env("A_STRING_VALUE", "testString"),
-		aInteger: envInt("AN_INTEGER_VALUE", "5"),
-		aFloat:   envFloat("A_FLOAT_VALUE", "3.12569"),
-		aBoolean: true,
-		aStruct: credentials{
-			username: env("AUTH_USER", ""),
-			password: env("AUTH_PASSWORD_FILE", ""),
+		AString:  env("A_STRING_VALUE", "testString"),
+		AInteger: envInt("AN_INTEGER_VALUE", "5"),
+		AFloat:   envFloat("A_FLOAT_VALUE", "3.12569"),
+		ABoolean: true,
+		AStruct: Credentials{
+			Username: env("AUTH_USER", ""),
+			Password: env("AUTH_PASSWORD", ""),
 		},
 	}
 }
