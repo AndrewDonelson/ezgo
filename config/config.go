@@ -42,7 +42,7 @@ func (cfg *Config) AddFlags(fs *flag.FlagSet) {
 	fs.StringVar(&cfg.AStruct.Password, "AStruct.Password", cfg.AStruct.Password, "Path to file that contains the Password for Mesos authentication")
 }
 
-//DefaultConfig crates adn returns a new configuration object
+//DefaultConfig creates and returns a new configuration object
 func DefaultConfig() *Config {
 	return &Config{
 		AString:  env("A_STRING_VALUE", "testString"),
