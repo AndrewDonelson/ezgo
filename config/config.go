@@ -43,8 +43,8 @@ func (cfg *Config) AddFlags(fs *flag.FlagSet) {
 }
 
 //DefaultConfig crates adn returns a new configuration object
-func DefaultConfig() Config {
-	return Config{
+func DefaultConfig() *Config {
+	return &Config{
 		AString:  env("A_STRING_VALUE", "testString"),
 		AInteger: envInt("AN_INTEGER_VALUE", "5"),
 		AFloat:   envFloat("A_FLOAT_VALUE", "3.12569"),
